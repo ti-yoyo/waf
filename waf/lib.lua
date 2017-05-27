@@ -10,8 +10,10 @@ function get_client_ip()
 	
     if CLIENT_IP ~= nil then
         i = string.find(ip, ',')
+	if i == nil then 
 	    if i > 0 then
 	        CLIENT_IP = string.sub(CLIENT_IP, 0, i-1)
+	    end
         end
     end
 	
