@@ -6,23 +6,25 @@ function get_client_ip()
     CLIENT_IP = ngx.req.get_headers()["X_Forwarded_For"]
     if CLIENT_IP == nil then
         CLIENT_IP  = ngx.var.remote_addr
+        return CLIENT_IP
     end
-	
+    
     if CLIENT_IP ~= nil then
-        i = string.find(ip, ',')
-	if i == nil then 
-	    if i > 0 then
-	        CLIENT_IP = string.sub(CLIENT_IP, 0, i-1)
-	    end
+        i = string.find(CLIENT_IP, ',')
+        if i ~= nil then
+            if i > 0 then
+                CLIENT_IP = string.sub(CLIENT_IP, 0, i-1)
+            end
         end
     end
-	
+
     if CLIENT_IP == nil then
         CLIENT_IP  = "unknown"
     end
-	
+
     return CLIENT_IP
 end
+
 
 
 --Get the client user agent
